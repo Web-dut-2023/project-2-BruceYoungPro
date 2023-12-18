@@ -1,24 +1,47 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
+<div class="container" style="margin-top: 50px; margin-bottom: 0;">
+    <div class="empty-small"></div>
+    <h2 class="mytextcolor center">Welcome!</h2>
+    <div class="row">
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
 
-    <h2>Login</h2>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="username" name="username" type="text">
+                    <label class="mytextcolor">Username</label>
+                </div>
+            </div>
 
-    {% if message %}
-        <div>{{ message }}</div>
-    {% endif %}
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="password" type="password" name="password" class="validate">
+                    <label for="password" class="mytextcolor">Password</label>
+                </div>
+            </div>
 
-    <form action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <input autofocus class="form-control" type="text" name="username" placeholder="Username">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Password">
-        </div>
-        <input class="btn btn-primary" type="submit" value="Login">
-    </form>
+            <button class="btn btn-large waves-effect waves-light mycolor right" type="submit" name="submit">Login
+            </button>
+        </form>
+    </div>
+    <div style="margin-top: 40px;">
+        <p style="font-size: 20px; margin-left: 10px;">
+            Don't have an account? <a href="{% url 'register' %}" class="mytextcolor">Register here.</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
 
-    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
-
+{% block script %}
+{% if message %}
+<script>
+    M.toast({
+        html: '{{message}}',
+        displayLength: 6000,
+        classes: 'white-text'
+    })
+</script>
+{% endif %}
 {% endblock %}

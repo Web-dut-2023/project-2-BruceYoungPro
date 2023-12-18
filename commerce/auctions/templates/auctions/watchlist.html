@@ -2,6 +2,7 @@
 
 {% block body %}
 <div class="container">
+    {% if list %}
     <div class="empty"></div>
     <div class="row">
         {% for item in list %}
@@ -13,6 +14,7 @@
                 <div class="card-content">
                     <div class="row" style="margin-bottom: 0">
                         <div class="col s6">
+
                             <a href="/item/{{ item.id }}" class="mytextcolor">
                                 <h5>{{ item.name }}</h5>
                             </a>
@@ -26,5 +28,13 @@
         </div>
         {% endfor %}
     </div>
+
+    {% else %}
+    <div class="empty"></div>
+    <div class="center mytextcolor">
+        <h1>Items you add to watchlist will appear here</h1>
+    </div>
+    {% endif %}
 </div>
+
 {% endblock %}

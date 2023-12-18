@@ -1,30 +1,58 @@
-{% extends "auctions/layout.html" %}
+{% extends 'auctions/layout.html' %}
+
+{% block title %}
+Register - Auctions
+{% endblock %}
 
 {% block body %}
+<div class="container">
+    <div class="empty"></div>
+    <h2 class="mytextcolor center">Register</h2>
+    <div class="row">
+        <form action="{% url 'register' %}" method="post" class="col s12">
+            {% csrf_token %}
 
-    <h2>Register</h2>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="username" name="username" type="text">
+                    <label class="mytextcolor">Username</label>
+                </div>
+            </div>
 
-    {% if message %}
-        <div>{{ message }}</div>
-    {% endif %}
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="email" name="email" type="email">
+                    <label class="mytextcolor">Email</label>
+                </div>
+            </div>
 
-    <form action="{% url 'register' %}" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="email" name="email" placeholder="Email Address">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Password">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
-        </div>
-        <input class="btn btn-primary" type="submit" value="Register">
-    </form>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="password" type="password" name="password" class="validate">
+                    <label for="password" class="mytextcolor">Password</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="confirmation" type="password" name="confirmation" class="validate">
+                    <label for="confirmation" class="mytextcolor">Confirm</label>
+                </div>
+            </div>
 
-    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+            <button class="btn btn-large waves-effect waves-light mycolor right" type="submit" name="submit">Register
+            </button>
+        </form>
+    </div>
+    <div style="margin-top: 40px;">
+        <p style="font-size: 20px; margin-left: 10px;">
+            Already have an account? <a href="{% url 'login' %}" class="mytextcolor">Login here.</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
 
+{% block script %}
+{% if message %}
+<script>
+    M.toast({ html: '{{message}}', displayLength: 6000, classes: 'white-text' })
+</script>
+{% endif %}
 {% endblock %}
